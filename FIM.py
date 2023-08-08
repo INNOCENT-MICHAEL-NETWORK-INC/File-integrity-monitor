@@ -2,6 +2,7 @@ import os
 import hashlib
 import time
 import argparse
+import keyboard
 
 def generate_line_hash(line):
     """Generate SHA-256 hash of a line"""
@@ -19,7 +20,9 @@ def monitor_files(rootdir):
     while True:
         print("listening....")
         time.sleep(5) # Wait for 5 seconds before checking again
-        
+        if keyboard.is_pressed("q"):  # Check if "q" key is pressed
+            print("Stopping monitoring...")
+            break
         for filename in all_filenames:
             with open(filename, "r") as f:
                 lines = f.readlines()
